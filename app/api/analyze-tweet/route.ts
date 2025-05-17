@@ -1,9 +1,10 @@
-
 import axios from "axios";
-import {GoogleGenAI} from "@google/genai"
+import {GoogleGenAI, Modality} from "@google/genai"
+import fs from "fs";
 
 
 export async function POST(req: Request) {
+    console.log(process.env.X_RAPID_API, "noi", process.env.X_RAPID_API1, "ketu",  process.env.GEMINI_API_KEY)
     const {userName} = await req.json();
 
     if(!userName){
@@ -70,7 +71,7 @@ async function aiTweet(tweets: any){
         1. A parallel universe version of the user (funny name, personality)
         2. Their partner (species, personality)
         3. A story of what they do together in that world
-        4. A prompt to generate a cartoon image of them together
+        4. A prompt to generate a cartoon image of them together and what he is doing with their girlfriend or boyfriend based on their tweets. it should include some loving, fighting, angry based on his or her tweets.
         Return all 4 as a JSON object.
     `;
 
@@ -85,6 +86,32 @@ async function aiTweet(tweets: any){
             systemInstruction: systemPrompt
         }
     });
+    // console.log()
 
-    const result = completion.text;
+    const cleanText = completion.text?.replace(/```json\n?|\n?```/g, '') || '{}';
+    const result: {species: string, personality: string, image_prompt: string, partner_persona: string} = JSON.parse(cleanText);
+
+    const response = await client.models.generateContent({
+        model: "gemini-2.0-flash-preview-image-generation",
+        contents: result?.image_prompt,
+        config: {
+          responseModalities: [Modality.TEXT, Modality.IMAGE],
+        },
+      });
+
+      if (response.candidates?.[0]?.content?.parts) {
+        for (const part of response.candidates[0].content.parts) {
+          // Based on the part type, either show the text or save the image
+          if (part.text) {
+            console.log(part.text);
+          } else if (part.inlineData?.data) {
+            const imageData = part.inlineData.data;
+            const buffer = Buffer.from(imageData, "base64");
+            fs.writeFileSync("gemini-native-image.png", buffer);
+            console.log("Image saved as gemini-native-image.png");
+          }
+        }
+      }
+
+    
 }

@@ -15,7 +15,7 @@ export default function Home() {
       alert("please enter user twitter username")
       return null
     }
-    const response = await axios.post('/api/analyze-tweet', {userName: "priyanshudotsol"})
+    const response = await axios.post('/api/analyze-tweet', {userName: twitterId})
     console.log(response.data)
   }
 
