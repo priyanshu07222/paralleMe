@@ -1,8 +1,7 @@
 "use client"
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import axios from "axios";
-import html2canvas from 'html2canvas';
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -15,6 +14,19 @@ export default function Home() {
   const [image, setImage] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null);
+  const [hearts, setHearts] = useState<Array<{id: number, x: number, y: number, emoji: string}>>([]);
+
+  useEffect(() => {
+    // Generate hearts only on client side
+    const emojis = ['❤️', '✨', '💫', '🌟', '💖'];
+    const newHearts = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: -100,
+      emoji: emojis[Math.floor(Math.random() * emojis.length)]
+    }));
+    setHearts(newHearts);
+  }, []);
 
   const clearPreviousResponse = () => {
     setSpecies("")
@@ -51,9 +63,11 @@ export default function Home() {
     if (!cardRef.current) return;
     
     try {
-      // Add loading state
       setLoading(true);
-
+      
+      // Dynamically import html2canvas
+      const html2canvas = (await import('html2canvas')).default;
+      
       const canvas = await html2canvas(cardRef.current, {
         backgroundColor: '#ffffff',
         scale: 2,
@@ -101,12 +115,12 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 text-center p-4 font-sans relative overflow-hidden">
       {/* Floating hearts animation */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {hearts.map((heart) => (
           <motion.div
-            key={i}
+            key={heart.id}
             className="absolute text-2xl"
             initial={{ 
-              x: Math.random() * window.innerWidth,
+              x: heart.x,
               y: -100,
               opacity: 0
             }}
@@ -121,7 +135,7 @@ export default function Home() {
               delay: Math.random() * 5
             }}
           >
-            {['❤️', '✨', '💫', '🌟', '💖'][Math.floor(Math.random() * 5)]}
+            {heart.emoji}
           </motion.div>
         ))}
       </div>
