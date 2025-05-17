@@ -1,3 +1,35 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme inline {
+    /* Configure your theme variables here */
+    --font-display: "Inter", "sans-serif";
+    --color-primary-500: oklch(0.84 0.18 117.33);
+    --spacing: 0.25rem;
+    --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+}
+
+@layer base {
+  .font-space-grotesk {
+    font-family: var(--font-space-grotesk);
+  }
+  
+  .font-bungee-shade {
+    font-family: var(--font-bungee-shade);
+  }
+  
+  .font-permanent-marker {
+    font-family: var(--font-permanent-marker);
+  }
+}
