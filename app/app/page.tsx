@@ -200,7 +200,7 @@ export default function AppPage() {
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 font-bungee-shade"
+              className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 font-bungee-shade px-4"
             >
               Discover Your Parallel Self ✨
             </motion.h1>
@@ -210,19 +210,19 @@ export default function AppPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="relative z-10"
+            className="relative z-10 px-4"
           >
             <input 
               type="text" 
               placeholder="Enter your Twitter username" 
               onChange={(e) => setTwitterId(e.target.value)} 
-              className="p-3 rounded-full w-full max-w-md outline-none mx-auto my-4 border-2 border-purple-300 text-black shadow-lg focus:border-pink-500 transition-all duration-300 font-space-grotesk"
+              className="p-3 rounded-full w-full max-w-md outline-none mx-auto my-4 border-2 border-purple-300 text-black shadow-lg focus:border-pink-500 transition-all duration-300 font-space-grotesk text-sm sm:text-base"
             />
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleClick} 
-              className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 cursor-pointer rounded-full mx-4 shadow-lg hover:shadow-xl transition-all duration-300 font-space-grotesk" 
+              className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-full mx-4 shadow-lg hover:shadow-xl transition-all duration-300 font-space-grotesk text-sm sm:text-base" 
               disabled={loading}
             >
               {loading ? (
@@ -246,17 +246,17 @@ export default function AppPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="mt-8 max-w-4xl mx-auto bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-6 text-black transform hover:scale-[1.02] transition-all duration-300 relative z-10"
+              className="mt-8 max-w-4xl mx-auto bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-4 sm:p-6 text-black transform hover:scale-[1.02] transition-all duration-300 relative z-10 mx-4"
             >
               <motion.h2 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 font-bungee-shade"
+                className="text-xl sm:text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 font-bungee-shade"
               >
                 ✨ Your Parallel Universe Identity ✨
               </motion.h2>
               
-              <div className="grid lg:grid-cols-2 gap-6 items-start">
+              <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 items-start">
                 <motion.div 
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -269,22 +269,22 @@ export default function AppPage() {
                         whileHover={{ scale: 1.02 }}
                         className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl p-3 shadow-lg w-full"
                       >
-                        <h3 className="font-bold text-sm text-purple-600 mb-0.5 font-bungee-shade">Species:</h3>
-                        <p className="text-gray-700 text-sm font-space-grotesk">{species}</p>
+                        <h3 className="font-bold text-xs sm:text-sm text-purple-600 mb-0.5 font-bungee-shade">Species:</h3>
+                        <p className="text-gray-700 text-xs sm:text-sm font-space-grotesk">{species}</p>
                       </motion.div>
                       <motion.div 
                         whileHover={{ scale: 1.02 }}
                         className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-3 shadow-lg w-full"
                       >
-                        <h3 className="font-bold text-sm text-pink-600 mb-0.5 font-bungee-shade">Personality:</h3>
-                        <p className="text-gray-700 text-sm font-space-grotesk">{personality}</p>
+                        <h3 className="font-bold text-xs sm:text-sm text-pink-600 mb-0.5 font-bungee-shade">Personality:</h3>
+                        <p className="text-gray-700 text-xs sm:text-sm font-space-grotesk">{personality}</p>
                       </motion.div>
                       <motion.div 
                         whileHover={{ scale: 1.02 }}
                         className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl p-3 shadow-lg w-full"
                       >
-                        <h3 className="font-bold text-sm text-purple-600 mb-0.5 font-bungee-shade">Story:</h3>
-                        <p className="text-gray-700 text-sm font-space-grotesk">{story}</p>
+                        <h3 className="font-bold text-xs sm:text-sm text-purple-600 mb-0.5 font-bungee-shade">Story:</h3>
+                        <p className="text-gray-700 text-xs sm:text-sm font-space-grotesk">{story}</p>
                       </motion.div>
                     </>
                   )}
@@ -308,15 +308,15 @@ export default function AppPage() {
                 )}
               </div>
               
-              <div className="flex gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row gap-3 mt-6">
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    const text =  `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://parallelme.priyanshu.pro`;
+                    const text =  `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://paralleme.priyanshu.pro`;
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                   }}
-                  className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm font-semibold font-space-grotesk"
+                  className="w-full sm:flex-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-xs sm:text-sm font-semibold font-space-grotesk"
                   disabled={loading}
                 >
                   Share Text Only 💫
@@ -326,7 +326,7 @@ export default function AppPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={shareToTwitter}
-                  className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm font-semibold font-space-grotesk"
+                  className="w-full sm:flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-xs sm:text-sm font-semibold font-space-grotesk"
                   disabled={loading}
                 >
                   {loading ? 'Processing...' : 'Download & Share 🎨'}

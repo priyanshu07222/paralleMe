@@ -110,7 +110,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto px-4"
+          className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -119,18 +119,18 @@ export default function LandingPage() {
             className="text-center mb-8 relative"
           >
             {/* Decorative elements */}
-            <div className="absolute -top-20 -left-20 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-rose-300/20 rounded-full blur-3xl"></div>
+            <div className="absolute -top-20 -left-20 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl hidden sm:block"></div>
+            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-rose-300/20 rounded-full blur-3xl hidden sm:block"></div>
             
             <motion.span 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-purple-600 font-space-grotesk text-lg md:text-xl mb-4 block relative"
+              className="text-purple-600 font-space-grotesk text-base sm:text-lg md:text-xl mb-4 block relative px-4"
             >
-              <span className="absolute -left-8 top-1/2 -translate-y-1/2 text-2xl">✨</span>
+              <span className="absolute -left-4 sm:-left-8 top-1/2 -translate-y-1/2 text-xl sm:text-2xl">✨</span>
               Discover Your Digital Twin
-              <span className="absolute -right-8 top-1/2 -translate-y-1/2 text-2xl">✨</span>
+              <span className="absolute -right-4 sm:-right-8 top-1/2 -translate-y-1/2 text-xl sm:text-2xl">✨</span>
             </motion.span>
             
             <motion.div
@@ -143,14 +143,14 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-5xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-purple-400 to-amber-400 font-bungee-shade relative"
+                className="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 via-purple-400 to-amber-400 font-bungee-shade relative px-4"
               >
                 ParallelMe
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="absolute -top-4 -right-4 text-4xl"
+                  className="absolute -top-4 -right-4 text-2xl sm:text-4xl"
                 >
                   ✨
                 </motion.div>
@@ -161,7 +161,7 @@ export default function LandingPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-xl md:text-2xl text-gray-700 font-medium mb-4 leading-relaxed font-space-grotesk"
+              className="text-lg sm:text-xl md:text-2xl text-gray-700 font-medium mb-4 leading-relaxed font-space-grotesk px-4"
             >
               Discover your alternate universe identity
               <motion.span 
@@ -178,7 +178,7 @@ export default function LandingPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto font-space-grotesk relative"
+              className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-space-grotesk relative px-4"
             >
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
@@ -203,12 +203,12 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12 relative"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-8 sm:mt-12 relative px-4"
           >
             {/* Button glow effects */}
             <div className="absolute -inset-4 bg-gradient-to-r from-rose-400/20 to-purple-400/20 blur-3xl -z-10"></div>
             
-            <Link href="/app">
+            <Link href="/app" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ 
                   scale: 1.05, 
@@ -216,7 +216,7 @@ export default function LandingPage() {
                   textShadow: "0 0 8px rgba(244, 114, 182, 0.5)"
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-rose-400 to-purple-400 text-white px-12 py-5 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+                className="w-full sm:w-auto bg-gradient-to-r from-rose-400 to-purple-400 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="relative z-10">Get Started ✨</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-rose-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -224,7 +224,7 @@ export default function LandingPage() {
               </motion.button>
             </Link>
             
-            <a href="https://twitter.com/priyanshudotsol" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/priyanshudotsol" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ 
                   scale: 1.05, 
@@ -232,7 +232,7 @@ export default function LandingPage() {
                   textShadow: "0 0 8px rgba(168, 85, 247, 0.5)"
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-purple-400 to-amber-400 text-white px-12 py-5 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-400 to-amber-400 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="relative z-10">Follow Us 🚀</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
