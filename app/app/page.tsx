@@ -62,46 +62,102 @@ export default function AppPage() {
     try {
       setLoading(true);
       
-      // Dynamically import html2canvas
-      const html2canvas = (await import('html2canvas')).default;
+      // Create a simple container
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.left = '0';
+      container.style.top = '0';
+      container.style.width = '100%';
+      container.style.height = '100%';
+      container.style.backgroundColor = 'white';
+      container.style.zIndex = '9999';
+      container.style.display = 'flex';
+      container.style.alignItems = 'center';
+      container.style.justifyContent = 'center';
+      container.style.padding = '20px';
       
-      const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        allowTaint: true
+      // Clone the card
+      const cardClone = cardRef.current.cloneNode(true) as HTMLElement;
+      
+      // Convert all gradient backgrounds to solid colors
+      const elementsWithGradient = cardClone.querySelectorAll('[class*="bg-gradient"]');
+      elementsWithGradient.forEach(el => {
+        if (el instanceof HTMLElement) {
+          // Replace gradient with solid color
+          el.style.background = '#ffffff';
+          el.style.backgroundColor = '#ffffff';
+        }
       });
       
-      // Convert to blob with better error handling
-      const blob = await new Promise<Blob>((resolve, reject) => {
-        canvas.toBlob((blob) => {
-          if (blob) {
-            resolve(blob);
-          } else {
-            reject(new Error('Failed to convert canvas to blob'));
+      // Set basic styles
+      cardClone.style.transform = 'none';
+      cardClone.style.transition = 'none';
+      cardClone.style.width = '600px';
+      cardClone.style.maxWidth = '100%';
+      cardClone.style.backgroundColor = 'white';
+      cardClone.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+      cardClone.style.borderRadius = '24px';
+      cardClone.style.padding = '20px';
+      
+      // Add to document
+      container.appendChild(cardClone);
+      document.body.appendChild(container);
+      
+      // Wait for render
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      try {
+        // Import html2canvas
+        const html2canvas = (await import('html2canvas')).default;
+        
+        // Capture
+        const canvas = await html2canvas(cardClone, {
+          backgroundColor: '#ffffff',
+          scale: 1,
+          useCORS: true,
+          allowTaint: true,
+          onclone: (clonedDoc) => {
+            // Ensure all text is black
+            const textElements = clonedDoc.querySelectorAll('p, h1, h2, h3, span');
+            textElements.forEach(el => {
+              if (el instanceof HTMLElement) {
+                el.style.color = '#000000';
+              }
+            });
           }
-        }, 'image/png', 1.0);
-      });
-
-      // Create and trigger download
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'parallel-universe.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      // Small delay to ensure download starts
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Open Twitter with pre-filled text
-      const text = `✨ My parallel self: ${species} with ${personality} vibes! Find yours at @ParallelMeApp #ParallelMe`;
-      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+        });
+        
+        // Convert to blob
+        const blob = await new Promise<Blob>((resolve, reject) => {
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('Failed to create blob'));
+          }, 'image/png', 1.0);
+        });
+        
+        // Create download
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'my-parallel-universe.png';
+        link.click();
+        URL.revokeObjectURL(url);
+        
+        // Clean up
+        document.body.removeChild(container);
+        
+        // Open Twitter
+        const text = `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? parallelme.priyanshu.pro`;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+      } catch (error) {
+        throw error;
+      } finally {
+        // Ensure cleanup
+        if (document.body.contains(container)) {
+          document.body.removeChild(container);
+        }
+      }
     } catch (error) {
-      console.error('Error sharing:', error);
       alert('Failed to share. Please try again.');
     } finally {
       setLoading(false);
@@ -186,6 +242,7 @@ export default function AppPage() {
           {(species && personality) || image ? (
             <motion.div 
               ref={cardRef}
+              data-card="true"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
@@ -251,12 +308,12 @@ export default function AppPage() {
                 )}
               </div>
               
-              <div className="flex gap-3 mt-3">
+              <div className="flex gap-3 mt-6">
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    const text = `✨ My parallel self: ${species} with ${personality} vibes! Find yours at @ParallelMeApp #ParallelMe`;
+                    const text =  `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? parallelme.priyanshu.pro`;
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                   }}
                   className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm font-semibold font-space-grotesk"
