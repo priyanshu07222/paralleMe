@@ -147,7 +147,7 @@ export default function AppPage() {
         document.body.removeChild(container);
         
         // Open Twitter
-        const text = `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://parallelme.priyanshu.pro`;
+        const text = `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://paralleme.priyanshu.pro`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
       } catch (error) {
         throw error;
