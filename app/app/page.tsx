@@ -147,7 +147,7 @@ export default function AppPage() {
         document.body.removeChild(container);
         
         // Open Twitter
-        const text = `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? parallelme.priyanshu.pro`;
+        const text = `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://parallelme.priyanshu.pro`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
       } catch (error) {
         throw error;
@@ -313,7 +313,7 @@ export default function AppPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
-                    const text =  `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? parallelme.priyanshu.pro`;
+                    const text =  `✨ Just discovered my parallel self - I'm a magical ${species}! Ready to meet yours? https://parallelme.priyanshu.pro`;
                     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                   }}
                   className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full hover:from-pink-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm font-semibold font-space-grotesk"
